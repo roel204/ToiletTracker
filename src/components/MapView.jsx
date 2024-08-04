@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import {View} from 'react-native';
+import MapView, {Marker} from 'react-native-maps';
 
-const MapViewComponent = ({ toilets, onSelectToilet, userLocation }) => {
+const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet}) => {
 
     return (
         <View className="flex-1">
@@ -17,14 +17,21 @@ const MapViewComponent = ({ toilets, onSelectToilet, userLocation }) => {
                 showsUserLocation={true}
                 showsCompass={false}
                 rotateEnabled={false}
+
+                region={{
+                    latitude: selectedToilet?.latitude,
+                    longitude: selectedToilet?.longitude,
+                    latitudeDelta: 0.05,
+                    longitudeDelta: 0.02,
+                }}
             >
                 {toilets.map(toilet => (
                     <Marker
                         key={toilet.id}
-                        coordinate={{ latitude: toilet.latitude, longitude: toilet.longitude }}
+                        coordinate={{latitude: toilet.latitude, longitude: toilet.longitude}}
                         onPress={() => onSelectToilet(toilet)}
-                        title={toilet.name}
-                        description={`${toilet.street}, ${toilet.city}`}
+                        // title={toilet.name}
+                        // description={`${toilet.street}, ${toilet.city}`}
                     />
                 ))}
             </MapView>

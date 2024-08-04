@@ -75,7 +75,7 @@ const HomeScreen = () => {
                     </TouchableOpacity>
 
                     {/*MapView*/}
-                    <MapViewComponent toilets={toilets} onSelectToilet={handleSelectToilet} userLocation={location}/>
+                    <MapViewComponent toilets={toilets} onSelectToilet={handleSelectToilet} userLocation={location} selectedToilet={selectedToilet}/>
 
                     {/*Sidebar*/}
                     {sidebarVisible && (
