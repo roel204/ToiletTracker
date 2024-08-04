@@ -80,7 +80,7 @@ const HomeScreen = () => {
                     {/*Sidebar*/}
                     {sidebarVisible && (
                         <Animated.View style={{transform: [{translateX: sidebarAnimation}]}} className="absolute top-0 bottom-0 left-0 right-0 z-40">
-                            <Sidebar toilets={toilets} onSelectToilet={handleSelectToilet}/>
+                            <Sidebar toilets={toilets} onSelectToilet={handleSelectToilet} toggleSidebar={toggleSidebar} />
                         </Animated.View>
                     )}
                 </View>
