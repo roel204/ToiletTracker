@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, Animated} from 'react-native';
 import MapViewComponent from '../components/MapView';
 import Sidebar from '../components/Sidebar';
 import fetchToilets from '../hooks/fetchToilets';
@@ -8,12 +8,33 @@ import * as Location from "expo-location";
 const HomeScreen = () => {
     const [loading, setLoading] = useState(true);
     const [location, setLocation] = useState({});
-    const [errorMsg, setErrorMsg] = useState(null);
+    const [errorMsg, setErrorMsg] = useState("");
     const [toilets, setToilets] = useState([]);
     const [selectedToilet, setSelectedToilet] = useState(null);
+    const [sidebarVisible, setSidebarVisible] = useState(false);
+    const [sidebarAnimation] = useState(new Animated.Value(-300));
 
     const handleSelectToilet = (toilet) => {
         setSelectedToilet(toilet);
+    };
+
+    const toggleSidebar = () => {
+        if (sidebarVisible) {
+            // Hide sidebar
+            Animated.timing(sidebarAnimation, {
+                toValue: -300,
+                duration: 300,
+                useNativeDriver: true,
+            }).start(() => setSidebarVisible(false));
+        } else {
+            // Show sidebar
+            setSidebarVisible(true);
+            Animated.timing(sidebarAnimation, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true,
+            }).start();
+        }
     };
 
     useEffect(() => {
@@ -28,35 +49,37 @@ const HomeScreen = () => {
             // Get the location
             let newLocation = await Location.getCurrentPositionAsync({});
             setLocation(newLocation);
-            console.log(newLocation)
 
             // Fetch the toilets
             setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
-            setLoading(false)
+            setLoading(false);
         })();
     }, []);
 
-
     return (
         <View className="flex-1">
-            {loading ? (
-                <Text>Loading...</Text>
-            ) : (
-                // <ScrollView className="flex-1">
-                //     {toilets.map((toilet, index) => (
-                //         <View key={index} className="p-2 border-b border-gray-200">
-                //             <Text className="text-lg font-bold">{toilet.name}</Text>
-                //             <Text>{toilet.street}, {toilet.city}</Text>
-                //             <Text>Accessible: {toilet.accessible ? 'Yes' : 'No'}</Text>
-                //             <Text>Unisex: {toilet.unisex ? 'Yes' : 'No'}</Text>
-                //         </View>
-                //     ))}
-                // </ScrollView>
+            {/*Sidebar Button*/}
+            <TouchableOpacity className="absolute top-3 left-3 z-50 p-4 bg-white rounded-lg text-4xl" onPress={toggleSidebar}>
+                <Text>{sidebarVisible ? `<` : '☰'}</Text>
+            </TouchableOpacity>
 
+            {/*Loading & Mapview*/}
+            {loading ? (
+                <Text>Loading... {errorMsg}</Text>
+            ) : (
                 <MapViewComponent toilets={toilets} onSelectToilet={handleSelectToilet} userLocation={location}/>
             )}
 
-            {/*<Sidebar toilets={toilets} onSelectToilet={handleSelectToilet} />*/}
+            {/*Sidebar*/}
+            {sidebarVisible && (
+                <Animated.View
+                    style={{transform: [{translateX: sidebarAnimation}], position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, zIndex: 40}}
+                >
+
+                        <Sidebar toilets={toilets} onSelectToilet={handleSelectToilet}/>
+
+                </Animated.View>
+            )}
         </View>
     );
 };
