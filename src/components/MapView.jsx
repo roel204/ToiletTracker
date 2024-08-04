@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 const MapViewComponent = ({ toilets, onSelectToilet, userLocation }) => {
-    console.log(userLocation);
 
     return (
         <View className="flex-1">

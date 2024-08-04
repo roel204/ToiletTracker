@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Animated} from 'react-native';
+import {View, Text, TouchableOpacity, Animated, ActivityIndicator} from 'react-native';
 import MapViewComponent from '../components/MapView';
 import Sidebar from '../components/Sidebar';
 import fetchToilets from '../hooks/fetchToilets';
@@ -7,10 +7,12 @@ import * as Location from "expo-location";
 
 const HomeScreen = () => {
     const [loading, setLoading] = useState(true);
-    const [location, setLocation] = useState({});
     const [errorMsg, setErrorMsg] = useState("");
+
+    const [location, setLocation] = useState({});
     const [toilets, setToilets] = useState([]);
     const [selectedToilet, setSelectedToilet] = useState(null);
+
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const [sidebarAnimation] = useState(new Animated.Value(-300));
 
@@ -58,28 +60,32 @@ const HomeScreen = () => {
 
     return (
         <View className="flex-1">
-            {/*Sidebar Button*/}
-            <TouchableOpacity className="absolute top-3 left-3 z-50 p-4 bg-white rounded-lg text-4xl" onPress={toggleSidebar}>
-                <Text>{sidebarVisible ? `<` : '☰'}</Text>
-            </TouchableOpacity>
 
-            {/*Loading & Mapview*/}
+            {/*Make sure the data is loaded*/}
             {loading ? (
-                <Text>Loading... {errorMsg}</Text>
+                <View className="flex-1 justify-center items-center">
+                    <ActivityIndicator size="large" color="#0000ff" />
+                    <Text className="text-center mt-2">{errorMsg}</Text>
+                </View>
             ) : (
-                <MapViewComponent toilets={toilets} onSelectToilet={handleSelectToilet} userLocation={location}/>
+                <View className="flex-1">
+                    {/*Hamburger Button*/}
+                    <TouchableOpacity className="absolute top-3 left-3 z-50 p-4 bg-white rounded-lg text-4xl" onPress={toggleSidebar}>
+                        <Text>{sidebarVisible ? `<` : '☰'}</Text>
+                    </TouchableOpacity>
+
+                    {/*MapView*/}
+                    <MapViewComponent toilets={toilets} onSelectToilet={handleSelectToilet} userLocation={location}/>
+
+                    {/*Sidebar*/}
+                    {sidebarVisible && (
+                        <Animated.View style={{transform: [{translateX: sidebarAnimation}]}} className="absolute top-0 bottom-0 left-0 right-0 z-40">
+                            <Sidebar toilets={toilets} onSelectToilet={handleSelectToilet}/>
+                        </Animated.View>
+                    )}
+                </View>
             )}
 
-            {/*Sidebar*/}
-            {sidebarVisible && (
-                <Animated.View
-                    style={{transform: [{translateX: sidebarAnimation}], position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, zIndex: 40}}
-                >
-
-                        <Sidebar toilets={toilets} onSelectToilet={handleSelectToilet}/>
-
-                </Animated.View>
-            )}
         </View>
     );
 };
