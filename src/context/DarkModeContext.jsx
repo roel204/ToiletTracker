@@ -11,7 +11,7 @@ export const DarkModeProvider = ({children}) => {
         const fetchDarkMode = async () => {
             const savedDarkMode = await getData('darkMode');
             if (savedDarkMode !== null) {
-                setColorScheme(colorScheme === "light" ? "dark" : "light")
+                setColorScheme(savedDarkMode)
             } else {
                 setColorScheme("light")
             }
@@ -20,8 +20,9 @@ export const DarkModeProvider = ({children}) => {
     }, []);
 
     const toggleDarkMode = () => {
-        setColorScheme(colorScheme === "light" ? "dark" : "light")
-        storeData('darkMode', colorScheme);
+        const newScheme = colorScheme === "light" ? "dark" : "light";
+        setColorScheme(newScheme);
+        storeData('darkMode', newScheme);
     }
 
     return (
