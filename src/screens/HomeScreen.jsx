@@ -59,7 +59,7 @@ const HomeScreen = () => {
     }, []);
 
     return (
-        <View className="flex-1">
+        <View className="flex-1 bg-blue-50 dark:bg-blue-950">
 
             {/*Make sure the data is loaded*/}
             {loading ? (

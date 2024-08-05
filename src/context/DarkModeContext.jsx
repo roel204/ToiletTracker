@@ -1,32 +1,31 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { Appearance } from 'react-native';
+import React, {createContext, useEffect} from 'react';
 import {getData, storeData} from '../hooks/useLocalStorage';
+import {useColorScheme} from "nativewind";
 
 export const DarkModeContext = createContext();
 
-export const DarkModeProvider = ({ children }) => {
-    const [darkMode, setDarkMode] = useState(false);
+export const DarkModeProvider = ({children}) => {
+    const { colorScheme, setColorScheme } = useColorScheme();
 
     useEffect(() => {
         const fetchDarkMode = async () => {
             const savedDarkMode = await getData('darkMode');
             if (savedDarkMode !== null) {
-                setDarkMode(savedDarkMode);
+                setColorScheme(colorScheme === "light" ? "dark" : "light")
             } else {
-                const colorScheme = Appearance.getColorScheme();
-                setDarkMode(colorScheme === 'dark');
+                setColorScheme("light")
             }
         };
         fetchDarkMode();
     }, []);
 
-    const changeDarkMode = () => {
-        setDarkMode(!darkMode);
-        storeData('darkMode', !darkMode);
+    const toggleDarkMode = () => {
+        setColorScheme(colorScheme === "light" ? "dark" : "light")
+        storeData('darkMode', colorScheme);
     }
 
     return (
-        <DarkModeContext.Provider value={{ darkMode, changeDarkMode }} className={`flex-1 ${darkMode ? 'dark' : ''}`}>
+        <DarkModeContext.Provider value={{colorScheme, toggleDarkMode}}>
             {children}
         </DarkModeContext.Provider>
     );

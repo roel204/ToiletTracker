@@ -6,7 +6,7 @@ import mapStyleDark from '../../assets/mapStyles/mapStyleDark.json';
 import mapStyleLight from '../../assets/mapStyles/mapStyleLight.json';
 
 const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet}) => {
-    const { darkMode } = useContext(DarkModeContext);
+    const { colorScheme } = useContext(DarkModeContext);
 
     return (
         <View className="flex-1">
@@ -23,7 +23,7 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
                 showsCompass={false}
                 rotateEnabled={false}
                 pitchEnabled={false}
-                customMapStyle={darkMode ? mapStyleDark : mapStyleLight}
+                customMapStyle={colorScheme === 'dark' ? mapStyleDark : mapStyleLight}
 
                 region={{
                     latitude: selectedToilet?.latitude,

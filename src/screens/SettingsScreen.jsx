@@ -6,7 +6,7 @@ import {useNavigation} from "@react-navigation/native";
 
 const SettingsScreen = () => {
     const navigation = useNavigation();
-    const { darkMode, changeDarkMode } = useContext(DarkModeContext);
+    const { colorScheme, toggleDarkMode } = useContext(DarkModeContext);
 
     const deleteData = async () => {
         try {
@@ -25,8 +25,8 @@ const SettingsScreen = () => {
             <View className="flex-row justify-between items-center w-full mb-4">
                 <Text className="text-lg dark:text-white">Dark Mode</Text>
                 <Switch
-                    value={darkMode}
-                    onValueChange={changeDarkMode}
+                    value={colorScheme === 'dark'}
+                    onValueChange={toggleDarkMode}
                 />
             </View>
             <TouchableOpacity

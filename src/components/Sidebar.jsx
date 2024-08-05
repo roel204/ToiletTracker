@@ -6,7 +6,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
     const navigation = useNavigation();
 
     return (
-        <View className="flex-1 h-full w-3/4 bg-white border-r-2 border-black">
+        <View className="flex-1 h-full w-3/4 bg-blue-50 dark:bg-blue-950 border-r-2 border-black">
             <View className="flex-row justify-center h-[10vh] border-b-2 border-black">
                 <TouchableOpacity className="p-4 bg-blue-500 rounded-lg" onPress={() => navigation.navigate('Settings')}>
                     <Text className="text-white text-center">Settings</Text>
