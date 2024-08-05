@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Appearance, View } from 'react-native';
-import AppNavigator from './src/navigation/AppNavigator';
-import { getData } from './src/hooks/useLocalStorage';
+import React, {useContext} from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './src/screens/HomeScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
+import { DarkModeProvider } from './src/context/DarkModeContext';
+
+const Stack = createStackNavigator();
 
 const App = () => {
-    const [darkMode, setDarkMode] = useState(false);
-
-    // TODO darkmode!
-    useEffect(() => {
-        const fetchDarkMode = async () => {
-            const savedDarkMode = await getData('darkMode');
-            if (savedDarkMode !== null) {
-                setDarkMode(savedDarkMode);
-            } else {
-                const colorScheme = Appearance.getColorScheme();
-                setDarkMode(colorScheme === 'dark');
-            }
-        };
-        fetchDarkMode();
-    }, []);
 
     return (
-        <SafeAreaView className={`flex-1 ${darkMode ? 'dark' : ''}`}>
-            <AppNavigator />
-        </SafeAreaView>
+        <DarkModeProvider>
+            <SafeAreaView className="flex-1">
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+                        <Stack.Screen name="Home" component={HomeScreen} />
+                        <Stack.Screen name="Settings" component={SettingsScreen} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </SafeAreaView>
+        </DarkModeProvider>
     );
 };
 

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import MapView, {Callout, Marker} from 'react-native-maps';
+import { DarkModeContext } from '../context/DarkModeContext';
+import mapStyleDark from '../../assets/mapStyles/mapStyleDark.json';
+import mapStyleLight from '../../assets/mapStyles/mapStyleLight.json';
 
 const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet}) => {
+    const { darkMode } = useContext(DarkModeContext);
 
     return (
         <View className="flex-1">
@@ -14,10 +18,12 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
                     latitudeDelta: 0.05,
                     longitudeDelta: 0.02,
                 }}
+                provider={"google"}
                 showsUserLocation={true}
                 showsCompass={false}
                 rotateEnabled={false}
                 pitchEnabled={false}
+                customMapStyle={darkMode ? mapStyleDark : mapStyleLight}
 
                 region={{
                     latitude: selectedToilet?.latitude,
