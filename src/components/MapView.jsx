@@ -4,9 +4,15 @@ import MapView, {Callout, Marker} from 'react-native-maps';
 import { DarkModeContext } from '../context/DarkModeContext';
 import mapStyleDark from '../../assets/mapStyles/mapStyleDark.json';
 import mapStyleLight from '../../assets/mapStyles/mapStyleLight.json';
+import {useNavigation} from "@react-navigation/native";
 
 const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet}) => {
+    const navigation = useNavigation();
     const { colorScheme } = useContext(DarkModeContext);
+
+    const viewDetails = () => {
+        navigation.navigate('Details', { selectedToilet });
+    }
 
     return (
         <View className="flex-1">
@@ -39,7 +45,7 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
                         opacity={0.8}
                         onPress={() => onSelectToilet(toilet)}
                     >
-                        <Callout onPress={() => console.log("Open more info thingy!!!")}>
+                        <Callout onPress={viewDetails}>
                             <View className="flex-1 p-2">
                                 <Text className="font-bold text-center">{toilet.name}</Text>
                                 <Text>{`${toilet.street}, ${toilet.city}`}</Text>

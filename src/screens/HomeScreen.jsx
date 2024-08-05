@@ -11,12 +11,12 @@ const HomeScreen = () => {
 
     const [location, setLocation] = useState({});
     const [toilets, setToilets] = useState([]);
-    const [selectedToilet, setSelectedToilet] = useState(null);
+    const [selectedToilet, setSelectedToilet] = useState({});
 
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const [sidebarAnimation] = useState(new Animated.Value(-300));
 
-    const handleSelectToilet = (toilet) => {
+    const selectToilet = (toilet) => {
         setSelectedToilet(toilet);
     };
 
@@ -25,7 +25,7 @@ const HomeScreen = () => {
             // Hide sidebar
             Animated.timing(sidebarAnimation, {
                 toValue: -300,
-                duration: 300,
+                duration: 200,
                 useNativeDriver: true,
             }).start(() => setSidebarVisible(false));
         } else {
@@ -33,7 +33,7 @@ const HomeScreen = () => {
             setSidebarVisible(true);
             Animated.timing(sidebarAnimation, {
                 toValue: 0,
-                duration: 300,
+                duration: 200,
                 useNativeDriver: true,
             }).start();
         }
@@ -75,12 +75,12 @@ const HomeScreen = () => {
                     </TouchableOpacity>
 
                     {/*MapView*/}
-                    <MapViewComponent toilets={toilets} onSelectToilet={handleSelectToilet} userLocation={location} selectedToilet={selectedToilet}/>
+                    <MapViewComponent toilets={toilets} onSelectToilet={selectToilet} userLocation={location} selectedToilet={selectedToilet}/>
 
                     {/*Sidebar*/}
                     {sidebarVisible && (
                         <Animated.View style={{transform: [{translateX: sidebarAnimation}]}} className="absolute top-0 bottom-0 left-0 right-0 z-40">
-                            <Sidebar toilets={toilets} onSelectToilet={handleSelectToilet} toggleSidebar={toggleSidebar} />
+                            <Sidebar toilets={toilets} onSelectToilet={selectToilet} toggleSidebar={toggleSidebar} />
                         </Animated.View>
                     )}
                 </View>
