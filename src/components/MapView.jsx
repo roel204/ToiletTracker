@@ -11,7 +11,7 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
     const { colorScheme } = useContext(DarkModeContext);
 
     const viewDetails = () => {
-        navigation.navigate('Details', { selectedToilet });
+        navigation.navigate('Details', { toilet: selectedToilet });
     }
 
     return (
