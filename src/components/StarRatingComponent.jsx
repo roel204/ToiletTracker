@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import StarRating from 'react-native-star-rating-widget';
-import {getData, storeData} from '../hooks/useLocalStorage';
+import {getData, storeData, removeData} from '../hooks/useLocalStorage';
 
 const StarRatingComponent = ({toilet}) => {
     const [rating, setRating] = useState(0);
@@ -13,7 +13,11 @@ const StarRatingComponent = ({toilet}) => {
     }, []);
 
     useEffect(() => {
-        storeData(`rating_${toilet.id}`, rating);
+        if (rating === 0) {
+            removeData(`rating_${toilet.id}`)
+        } else {
+            storeData(`rating_${toilet.id}`, rating);
+        }
     }, [rating]);
 
     return (
