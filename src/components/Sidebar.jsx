@@ -36,7 +36,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
                     </TouchableOpacity>
                 ))}
             </ScrollView>
-            <View className="h-[10vh] border-t-2 border-black">
+            <View className="h-[12vh]">
                 <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter} />
             </View>
         </View>

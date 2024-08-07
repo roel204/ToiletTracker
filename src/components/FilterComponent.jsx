@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {getData, storeData} from '../hooks/useLocalStorage';
-import {Switch, View} from "react-native";
+import {Switch, Text, View} from "react-native";
 
 const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, setUnisexFilter}) => {
 
@@ -24,18 +24,23 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
     }
 
     return (
-        <View className='flex-1'>
-            <Switch
-                value={accessibleFilter}
-                onValueChange={toggleAccessibleFilter}
-            />
-            <Switch
-                value={unisexFilter}
-                onValueChange={toggleUnisexFilter}
-            />
+        <View className="flex-1 flex-row justify-evenly items-center border-t-2 border-black">
+            <View className="flex-1 w-24 items-center">
+                <Text className="text-center font-bold">Accessible</Text>
+                <Switch
+                    value={accessibleFilter}
+                    onValueChange={toggleAccessibleFilter}
+                />
+            </View>
+            <View className="flex-1 w-24 items-center">
+                <Text className="text-center font-bold">Unisex</Text>
+                <Switch
+                    value={unisexFilter}
+                    onValueChange={toggleUnisexFilter}
+                />
+            </View>
         </View>
-    )
-
+    );
 }
 
 export default FilterComponent;
