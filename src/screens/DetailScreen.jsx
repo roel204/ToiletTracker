@@ -1,8 +1,10 @@
+import React from 'react';
 import {View, Text} from "react-native";
+import StarRatingComponent from '../components/StarRatingComponent';
 
 const DetailScreen = ({route, navigation}) => {
     const {toilet} = route.params;
-    console.log(JSON.stringify(toilet))
+
 
     return (
         <View className="flex-1">
@@ -16,6 +18,7 @@ const DetailScreen = ({route, navigation}) => {
                     <Text>Distance: {toilet.distance.toFixed(1)} km</Text>
                     <Text>Accessible: {toilet.accessible ? 'Yes' : 'No'}</Text>
                     <Text>Unisex: {toilet.unisex ? 'Yes' : 'No'}</Text>
+                    <StarRatingComponent toilet={toilet}/>
                 </>
             ) : (
                 <Text>No toilet details available: {toilet}</Text>
