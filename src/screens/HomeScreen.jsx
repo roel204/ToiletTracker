@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Animated, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity, Animated, ActivityIndicator, Alert} from 'react-native';
 import MapViewComponent from '../components/MapView';
 import Sidebar from '../components/Sidebar';
 import fetchToilets from '../hooks/fetchToilets';
@@ -7,7 +7,6 @@ import * as Location from "expo-location";
 
 const HomeScreen = () => {
     const [loading, setLoading] = useState(true);
-    const [errorMsg, setErrorMsg] = useState("");
 
     const [location, setLocation] = useState({});
     const [toilets, setToilets] = useState([]);
@@ -44,7 +43,7 @@ const HomeScreen = () => {
         (async () => {
             let {status} = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
+                Alert.alert('Permission to access location was denied');
                 return;
             }
 
@@ -65,7 +64,6 @@ const HomeScreen = () => {
             {loading ? (
                 <View className="flex-1 justify-center items-center">
                     <ActivityIndicator size="large" color="#0000ff" />
-                    <Text className="text-center mt-2">{errorMsg}</Text>
                 </View>
             ) : (
                 <View className="flex-1">

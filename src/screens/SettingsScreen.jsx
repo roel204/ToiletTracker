@@ -29,10 +29,7 @@ const SettingsScreen = () => {
                     onValueChange={toggleDarkMode}
                 />
             </View>
-            <TouchableOpacity
-                className="bg-red-500 p-4 rounded-md"
-                onPress={deleteData}
-            >
+            <TouchableOpacity className="bg-red-500 p-4 rounded-md" onPress={deleteData}>
                 <Text className="text-white">Delete Data</Text>
             </TouchableOpacity>
         </View>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import StarRating from 'react-native-star-rating-widget';
 import {getData, storeData, removeData} from '../hooks/useLocalStorage';
+import {Alert, Share, Text, TouchableOpacity, View} from "react-native";
 
 const StarRatingComponent = ({toilet}) => {
     const [rating, setRating] = useState(0);
@@ -8,7 +9,9 @@ const StarRatingComponent = ({toilet}) => {
     useEffect(() => {
         (async () => {
             const ratingData = await getData(`rating_${toilet.id}`);
-            setRating(ratingData)
+            if (ratingData !== null) {
+                setRating(ratingData)
+            }
         })();
     }, []);
 
@@ -20,12 +23,25 @@ const StarRatingComponent = ({toilet}) => {
         }
     }, [rating]);
 
+    const shareRating = async () => {
+        try {
+            await Share.share({
+                message: `I rate the toilet in ${toilet.name} ${rating} stars. `,
+            });
+        } catch (error) {
+            Alert.alert(error.message);
+        }
+    }
+
     return (
-        <StarRating
-            rating={rating}
-            onChange={setRating}
-        />
+        <View className="flex-1">
+            <StarRating rating={rating} onChange={setRating}/>
+            <TouchableOpacity className="bg-blue-500 p-4 rounded-md" onPress={shareRating}>
+                <Text className="text-white">Share</Text>
+            </TouchableOpacity>
+        </View>
     )
+
 }
 
 export default StarRatingComponent;
