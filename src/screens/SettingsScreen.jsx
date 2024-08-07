@@ -3,6 +3,7 @@ import { View, Text, Switch, TouchableOpacity } from 'react-native';
 import {DarkModeContext} from "../context/DarkModeContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useNavigation} from "@react-navigation/native";
+import {FontAwesome} from "@expo/vector-icons";
 
 const SettingsScreen = () => {
     const navigation = useNavigation();
@@ -19,8 +20,8 @@ const SettingsScreen = () => {
 
     return (
         <View className="flex-1 justify-center items-center p-4 bg-white dark:bg-black">
-            <TouchableOpacity className="absolute top-3 left-3 p-4 bg-blue-500 rounded-lg" onPress={() => navigation.navigate('Home')}>
-                <Text className="text-white text-center">Home</Text>
+            <TouchableOpacity className="absolute top-3 left-3 justify-center items-center h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Home')}>
+                <FontAwesome name="arrow-left" size={30} />
             </TouchableOpacity>
             <View className="flex-row justify-between items-center w-full mb-4">
                 <Text className="text-lg dark:text-white">Dark Mode</Text>

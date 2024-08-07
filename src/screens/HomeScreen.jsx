@@ -4,6 +4,7 @@ import MapViewComponent from '../components/MapView';
 import Sidebar from '../components/Sidebar';
 import fetchToilets from '../hooks/fetchToilets';
 import * as Location from "expo-location";
+import {FontAwesome} from "@expo/vector-icons";
 
 const HomeScreen = () => {
     const [loading, setLoading] = useState(true);
@@ -57,6 +58,18 @@ const HomeScreen = () => {
         })();
     }, []);
 
+    const reloadToilets = () => {
+        (async () => {
+            setLoading(true);
+
+            let newLocation = await Location.getCurrentPositionAsync({});
+            setLocation(newLocation);
+
+            setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
+            setLoading(false);
+        })();
+    }
+
     return (
         <View className="flex-1 bg-blue-50 dark:bg-blue-950">
 
@@ -68,8 +81,8 @@ const HomeScreen = () => {
             ) : (
                 <View className="flex-1">
                     {/*Hamburger Button*/}
-                    <TouchableOpacity className="absolute top-3 left-3 z-50 p-4 bg-white rounded-lg text-4xl" onPress={toggleSidebar}>
-                        <Text>{sidebarVisible ? `<` : '☰'}</Text>
+                    <TouchableOpacity className="absolute justify-center items-center top-3 left-3 z-50 h-12 w-12 bg-white rounded-3xl" onPress={toggleSidebar}>
+                        {sidebarVisible ? <FontAwesome name="arrow-left" size={30} color="black" /> : <FontAwesome name="bars" size={30} color="black" />}
                     </TouchableOpacity>
 
                     {/*MapView*/}
@@ -78,7 +91,7 @@ const HomeScreen = () => {
                     {/*Sidebar*/}
                     {sidebarVisible && (
                         <Animated.View style={{transform: [{translateX: sidebarAnimation}]}} className="absolute top-0 bottom-0 left-0 right-0 z-40">
-                            <Sidebar toilets={toilets} onSelectToilet={selectToilet} toggleSidebar={toggleSidebar} />
+                            <Sidebar toilets={toilets} onSelectToilet={selectToilet} toggleSidebar={toggleSidebar} reloadToilets={reloadToilets}/>
                         </Animated.View>
                     )}
                 </View>

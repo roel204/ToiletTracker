@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import FilterComponent from "./FilterComponent";
+import { FontAwesome } from '@expo/vector-icons';
 
-const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
+const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
     const navigation = useNavigation();
     const [accessibleFilter, setAccessibleFilter] = useState(false);
     const [unisexFilter, setUnisexFilter] = useState(false);
@@ -17,9 +18,13 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
 
     return (
         <View className="flex-1 h-full w-3/4 bg-blue-50 dark:bg-blue-950 border-r-2 border-black">
-            <View className="flex-row justify-center h-[10vh] border-b-2 border-black">
-                <TouchableOpacity className="p-4 bg-blue-500 rounded-lg" onPress={() => navigation.navigate('Settings')}>
-                    <Text className="text-white text-center">Settings</Text>
+            <View className="flex-row justify-between h-[10vh] border-b-2 border-black">
+                <View  className="justify-center top-3 h-12 w-12 rounded-3xl"/>
+                <TouchableOpacity className="justify-center items-center top-3 h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Settings')}>
+                    <FontAwesome name="gear" size={30} />
+                </TouchableOpacity>
+                <TouchableOpacity className="justify-center items-center top-3 right-3 h-12 w-12 bg-white rounded-3xl" onPress={reloadToilets}>
+                    <FontAwesome name="rotate-right" size={30} color="black" />
                 </TouchableOpacity>
             </View>
             <ScrollView className="p-2">
@@ -37,7 +42,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
                 ))}
             </ScrollView>
             <View className="h-[12vh]">
-                <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter} />
+                <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter}/>
             </View>
         </View>
     );
