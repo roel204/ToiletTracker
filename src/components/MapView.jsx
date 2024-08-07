@@ -43,6 +43,7 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
                         key={toilet.id}
                         coordinate={{latitude: toilet.latitude, longitude: toilet.longitude}}
                         opacity={0.8}
+                        pinColor={toilet.accessible ? 'blue' : toilet.unisex ? 'purple' : 'red'}
                         onPress={() => onSelectToilet(toilet)}
                     >
                         <Callout onPress={viewDetails}>

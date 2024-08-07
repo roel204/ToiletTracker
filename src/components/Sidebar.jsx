@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import FilterComponent from "./FilterComponent";
 
 const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
     const navigation = useNavigation();
+    const [accessibleFilter, setAccessibleFilter] = useState(false);
+    const [unisexFilter, setUnisexFilter] = useState(false);
+
+    const filteredToilets = toilets.filter(toilet => {
+        return (
+            (!accessibleFilter || toilet.accessible) &&
+            (!unisexFilter || toilet.unisex)
+        );
+    });
 
     return (
         <View className="flex-1 h-full w-3/4 bg-blue-50 dark:bg-blue-950 border-r-2 border-black">
@@ -13,7 +23,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
                 </TouchableOpacity>
             </View>
             <ScrollView className="p-2">
-                {toilets.map(toilet => (
+                {filteredToilets.map(toilet => (
                     <TouchableOpacity key={toilet.id} onPress={() => {
                         onSelectToilet(toilet)
                         toggleSidebar()
@@ -27,7 +37,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar}) => {
                 ))}
             </ScrollView>
             <View className="h-[10vh] border-t-2 border-black">
-                <Text>Filters</Text>
+                <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter} />
             </View>
         </View>
     );
