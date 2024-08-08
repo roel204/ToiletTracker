@@ -9,6 +9,7 @@ const SettingsScreen = () => {
     const navigation = useNavigation();
     const {colorScheme, toggleDarkMode} = useContext(DarkModeContext);
 
+    // Function to delete all data from AsyncStorage
     const deleteData = async () => {
         try {
             await AsyncStorage.clear();
@@ -18,6 +19,7 @@ const SettingsScreen = () => {
         }
     };
 
+    // Confirmation pop-up for before deleting all data
     const confirmDelete = () => {
         Alert.alert(
             'Confirm Deletion',
@@ -33,16 +35,21 @@ const SettingsScreen = () => {
                     onPress: deleteData,
                 },
             ],
-            { cancelable: true }
+            {cancelable: true}
         );
     };
 
     return (
         <View className="flex-1 p-5 bg-bgLight dark:bg-bgDark">
+
+            {/*Back button*/}
             <TouchableOpacity className="absolute top-3 left-3 justify-center items-center h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Home')}>
                 <FontAwesome name="arrow-left" size={30}/>
             </TouchableOpacity>
+
             <View className="flex-1 gap-4 pt-14">
+
+                {/*Dark Mode switch*/}
                 <View className="flex-row items-center justify-between p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                     <Text className="text-black dark:text-white text-lg">Dark Mode</Text>
                     <Switch
@@ -50,10 +57,13 @@ const SettingsScreen = () => {
                         onValueChange={toggleDarkMode}
                     />
                 </View>
+
+                {/*Delete all data button*/}
                 <View className="flex-row items-center justify-between p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                     <Text className="text-black dark:text-white text-lg">Delete All Data</Text>
                     <TouchableOpacity className="bg-red-500 p-4 rounded-md" onPress={confirmDelete}><Text className="text-black dark:text-white">DELETE</Text></TouchableOpacity>
                 </View>
+
             </View>
         </View>
     );

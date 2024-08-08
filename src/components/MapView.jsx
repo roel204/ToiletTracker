@@ -1,26 +1,29 @@
 import React, {useContext, useEffect, useRef} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import MapView, {Callout, Marker} from 'react-native-maps';
-import { DarkModeContext } from '../context/DarkModeContext';
+import {DarkModeContext} from '../context/DarkModeContext';
 import mapStyleDark from '../../assets/mapStyles/mapStyleDark.json';
 import mapStyleLight from '../../assets/mapStyles/mapStyleLight.json';
 import {useNavigation} from "@react-navigation/native";
 
 const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToilet}) => {
     const navigation = useNavigation();
-    const { colorScheme } = useContext(DarkModeContext);
+    const {colorScheme} = useContext(DarkModeContext);
     const markerRefs = useRef({});
 
+    // Automatically open the Callout if a toilet has been selected
     useEffect(() => {
         if (selectedToilet && markerRefs.current[selectedToilet.id]) {
             markerRefs.current[selectedToilet.id].showCallout();
         }
     }, [selectedToilet]);
 
+    // Navigate to the detail page
     const viewDetails = () => {
-        navigation.navigate('Details', { toilet: selectedToilet });
+        navigation.navigate('Details', {toilet: selectedToilet});
     }
 
+    // Safety check incase toilets have loaded incorrectly
     const safeToilets = Array.isArray(toilets) ? toilets : [];
 
     return (
@@ -38,8 +41,9 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                 showsCompass={false}
                 rotateEnabled={false}
                 pitchEnabled={false}
-                customMapStyle={colorScheme === 'dark' ? mapStyleDark : mapStyleLight}
+                customMapStyle={colorScheme === 'dark' ? mapStyleDark : mapStyleLight} {/*Select custom light/dark theme*/}
 
+                {/*Change the region if a new toilet has been selected*/}
                 region={{
                     latitude: selectedToilet?.latitude,
                     longitude: selectedToilet?.longitude,
@@ -48,19 +52,26 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                 }}
             >
                 {safeToilets.map(toilet => (
+                    // Map each marker on the map
                     <Marker
                         key={toilet.id}
                         coordinate={{latitude: toilet.latitude, longitude: toilet.longitude}}
                         opacity={0.8}
-                        pinColor={toilet.accessible ? 'blue' : toilet.unisex ? 'purple' : 'red'}
-                        onPress={() => setSelectedToilet(toilet)}
-                        ref={(ref) => { markerRefs.current[toilet.id] = ref; }}
+                        pinColor={toilet.accessible ? 'blue' : toilet.unisex ? 'purple' : 'red'} {/*Custom pin colors*/}
+                        onPress={() => setSelectedToilet(toilet)} {/*Select the toilet when the marker has been pressed*/}
+                        ref={(ref) => {
+                            // Create refs to open the callouts using code
+                            markerRefs.current[toilet.id] = ref;
+                        }}
                     >
                         <Callout onPress={viewDetails} tooltip={true}>
                             <View className="flex-1 p-3 bg-bgLight dark:bg-bgDark justify-center items-center rounded-lg border-white border">
+
+                                {/*Name & Location*/}
                                 <Text className="text-black dark:text-white font-bold text-center">{toilet.name}</Text>
                                 <Text className="text-black dark:text-white">{`${toilet.street}, ${toilet.city}`}</Text>
 
+                                {/*Button to open detail view (Button doesnt do anything, click is handled by the whole callout)*/}
                                 <TouchableOpacity className="mt-2 w-full bg-blue-400 rounded">
                                     <Text className="text-black dark:text-white m-2 text-center">More Info</Text>
                                 </TouchableOpacity>

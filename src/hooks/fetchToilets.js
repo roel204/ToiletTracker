@@ -1,3 +1,4 @@
+// Fetch toilets from the API
 const fetchToilets = async (lat, lng) => {
     const url = `https://public-bathrooms.p.rapidapi.com/location?lat=${lat}&lng=${lng}`;
     const options = {

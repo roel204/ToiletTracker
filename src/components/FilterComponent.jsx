@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
-import {getData, storeData} from '../hooks/useLocalStorage';
+import {getData, storeData} from '../hooks/useAsyncStorage';
 import {Switch, Text, View} from "react-native";
 
 const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, setUnisexFilter}) => {
 
+    // Get saved filter settings from AsyncStorage
     useEffect(() => {
         (async () => {
             const accessibleFilterData = await getData('accessibleFilter');
@@ -13,11 +14,13 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
         })()
     }, []);
 
+    // Toggle Accessible Filter & save setting
     const toggleAccessibleFilter = () => {
         setAccessibleFilter(!accessibleFilter);
         storeData('accessibleFilter', !accessibleFilter);
     }
 
+    // Toggle Unisex Filter & save setting
     const toggleUnisexFilter = () => {
         setUnisexFilter(!unisexFilter);
         storeData('unisexFilter', !unisexFilter);
@@ -25,6 +28,8 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
 
     return (
         <View className="flex-1 flex-row justify-evenly items-center border-t-2 border-black">
+
+            {/*Accessibe switch*/}
             <View className="flex-1 w-24 items-center">
                 <Text className="text-black dark:text-white text-center font-bold">Accessible</Text>
                 <Switch
@@ -34,6 +39,8 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
                     onValueChange={toggleAccessibleFilter}
                 />
             </View>
+
+            {/*Unisex Switch*/}
             <View className="flex-1 w-24 items-center">
                 <Text className="text-black dark:text-white text-center font-bold">Unisex</Text>
                 <Switch

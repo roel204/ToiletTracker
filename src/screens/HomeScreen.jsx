@@ -36,6 +36,7 @@ const HomeScreen = () => {
         }
     };
 
+    // useEffect to initialize the app, also set status message to show progress to the user
     useEffect(() => {
         // Get permission to track location
         (async () => {
@@ -58,6 +59,7 @@ const HomeScreen = () => {
         })();
     }, []);
 
+    // Reaload the toilets
     const reloadToilets = () => {
         (async () => {
             setLoading(true);
@@ -75,10 +77,10 @@ const HomeScreen = () => {
     return (
         <View className="flex-1 bg-bgLight dark:bg-bgDark">
 
-            {/*Make sure the data is loaded*/}
+            {/*Loading screen*/}
             {loading ? (
                 <View className="flex-1 justify-center items-center">
-                    <ActivityIndicator size="large" color="#0000ff" />
+                    <ActivityIndicator size={50} color="#0000ff"/>
                     <Text className="text-black dark:text-white mt-5">{statusMsg}</Text>
                     <Text className="text-black dark:text-white absolute bottom-5">Disclaimer: Not many toilets known to database.</Text>
                 </View>
@@ -86,7 +88,7 @@ const HomeScreen = () => {
                 <View className="flex-1">
                     {/*Hamburger Button*/}
                     <TouchableOpacity className="absolute justify-center items-center top-3 left-3 z-50 h-12 w-12 bg-white rounded-3xl" onPress={toggleSidebar}>
-                        {sidebarVisible ? <FontAwesome name="arrow-left" size={30} color="black" /> : <FontAwesome name="bars" size={30} color="black" />}
+                        {sidebarVisible ? <FontAwesome name="arrow-left" size={30} color="black"/> : <FontAwesome name="bars" size={30} color="black"/>}
                     </TouchableOpacity>
 
                     {/*MapView*/}
