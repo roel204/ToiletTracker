@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import StarRating from 'react-native-star-rating-widget';
 import {getData, storeData, removeData} from '../hooks/useLocalStorage';
-import {Alert, Share, Text, TouchableOpacity, View} from "react-native";
+import {Alert, Share, TouchableOpacity, View} from "react-native";
+import {FontAwesome} from "@expo/vector-icons";
 
 const StarRatingComponent = ({toilet}) => {
     const [rating, setRating] = useState(0);
@@ -34,14 +35,13 @@ const StarRatingComponent = ({toilet}) => {
     }
 
     return (
-        <View className="flex-1">
-            <StarRating rating={rating} onChange={setRating}/>
-            <TouchableOpacity className="bg-blue-500 p-4 rounded-md" onPress={shareRating}>
-                <Text className="text-white">Share</Text>
+        <>
+            <StarRating className="" rating={rating} onChange={setRating} starSize={40}/>
+            <TouchableOpacity className="p-4 rounded-md" onPress={shareRating}>
+                <FontAwesome name="share-alt" size={24} color="black" />
             </TouchableOpacity>
-        </View>
+        </>
     )
-
 }
 
 export default StarRatingComponent;

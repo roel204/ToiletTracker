@@ -57,7 +57,7 @@ const HomeScreen = () => {
 
             // Fetch the toilets
             setStatusMsg("Finding nearby toilets.")
-            setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
+            await setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
             setLoading(false);
         })();
     }, []);

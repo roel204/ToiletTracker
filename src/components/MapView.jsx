@@ -14,6 +14,9 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
         navigation.navigate('Details', { toilet: selectedToilet });
     }
 
+    // Ensure toilets is always an array before mapping
+    const safeToilets = Array.isArray(toilets) ? toilets : [];
+
     return (
         <View className="flex-1">
             <MapView
@@ -38,7 +41,7 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
                     longitudeDelta: 0.02,
                 }}
             >
-                {toilets.map(toilet => (
+                {safeToilets.map(toilet => (
                     <Marker
                         key={toilet.id}
                         coordinate={{latitude: toilet.latitude, longitude: toilet.longitude}}

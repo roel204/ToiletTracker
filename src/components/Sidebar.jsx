@@ -9,7 +9,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
     const [accessibleFilter, setAccessibleFilter] = useState(false);
     const [unisexFilter, setUnisexFilter] = useState(false);
 
-    const filteredToilets = toilets.filter(toilet => {
+    const filteredToilets = (Array.isArray(toilets) ? toilets : []).filter(toilet => {
         return (
             (!accessibleFilter || toilet.accessible) &&
             (!unisexFilter || toilet.unisex)

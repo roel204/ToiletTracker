@@ -19,7 +19,7 @@ const SettingsScreen = () => {
     };
 
     return (
-        <View className="flex-1 justify-center items-center p-4 bg-white dark:bg-black">
+        <View className="flex-1 justify-center items-center p-4 bg-blue-50 dark:bg-blue-950">
             <TouchableOpacity className="absolute top-3 left-3 justify-center items-center h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Home')}>
                 <FontAwesome name="arrow-left" size={30} />
             </TouchableOpacity>
