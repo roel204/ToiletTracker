@@ -23,7 +23,7 @@ const SettingsScreen = () => {
     const confirmDelete = () => {
         Alert.alert(
             'Confirm Deletion',
-            'Are you sure you want to delete all data? This action cannot be undone.',
+            'Are you sure you want to delete all data including ratings?',
             [
                 {
                     text: 'Cancel',

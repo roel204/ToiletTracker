@@ -59,7 +59,7 @@ const HomeScreen = () => {
         })();
     }, []);
 
-    // Reaload the toilets
+    // Reload the toilets
     const reloadToilets = () => {
         (async () => {
             setLoading(true);
@@ -80,7 +80,7 @@ const HomeScreen = () => {
             {/*Loading screen*/}
             {loading ? (
                 <View className="flex-1 justify-center items-center">
-                    <ActivityIndicator size={50} color="#0000ff"/>
+                    <ActivityIndicator size={100} color="#0000ff"/>
                     <Text className="text-black dark:text-white mt-5">{statusMsg}</Text>
                     <Text className="text-black dark:text-white absolute bottom-5">Disclaimer: Not many toilets known to database.</Text>
                 </View>

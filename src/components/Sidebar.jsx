@@ -25,7 +25,8 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => 
 
                 {/*Top bar*/}
                 <View className="flex-row justify-between h-[10vh]">
-                    <View className="justify-center top-3 h-12 w-12 rounded-3xl"/> {/*Empty view for spacing purposes*/}
+                    {/*Empty view for spacing purposes*/}
+                    <View className="justify-center top-3 h-12 w-12 rounded-3xl"/>
 
                     {/*Settings button*/}
                     <TouchableOpacity className="justify-center items-center top-3 h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Settings')}>
@@ -41,13 +42,10 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => 
                 {/*ScrollView with all the items inide*/}
                 <ScrollView className="p-2">
                     {filteredToilets.map(toilet => (
+                        // Select the toilet and close the sidebar
                         <TouchableOpacity key={toilet.id} onPress={() => {
                             setSelectedToilet(toilet);
-                            {/*Select the toilet*/
-                            }
                             toggleSidebar();
-                            {/*Close the sidebar*/
-                            }
                         }}>
                             <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">
 
@@ -80,7 +78,7 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => 
             </View>
 
             {/*Empty button to the right of the sidebar to close it*/}
-            <TouchableOpacity className="h-full w-1/4" onPress={toggleSidebar}/>
+            <TouchableOpacity className="h-full w-1/4" onPress={toggleSidebar}></TouchableOpacity>
         </View>
     );
 };
