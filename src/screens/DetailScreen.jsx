@@ -15,33 +15,33 @@ const DetailScreen = ({route, navigation}) => {
             {toilet ? (
                 <View className="flex-1 gap-4 pt-14">
                     <View className="flex-row items-center justify-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
-                        <Text className="font-bold">{toilet.name}</Text>
+                        <Text className="text-black dark:text-white font-bold">{toilet.name}</Text>
                     </View>
                     <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                         <FontAwesome name="map-marker" size={24} color="black"/>
-                        <Text className="pl-5">{toilet.street + ", " + toilet.city}</Text>
+                        <Text className="text-black dark:text-white pl-5">{toilet.street + ", " + toilet.city}</Text>
                     </View>
                     <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                         <FontAwesome name="location-arrow" size={24} color="black"/>
-                        <Text className="pl-5">{toilet.directions ? toilet.directions : "No Directions"}</Text>
+                        <Text className="text-black dark:text-white pl-5">{toilet.directions ? toilet.directions : "No Directions"}</Text>
                     </View>
                     <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                         <FontAwesome name="comment" size={24} color="black"/>
-                        <Text className="pl-5">{toilet.comment ? toilet.comment : "No Comment"}</Text>
+                        <Text className="text-black dark:text-white pl-5">{toilet.comment ? toilet.comment : "No Comment"}</Text>
                     </View>
 
                     <View className="flex-row justify-between">
                         <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                             <FontAwesome name="compass" size={24} color="black"/>
-                            <Text className="pl-3">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
+                            <Text className="text-black dark:text-white pl-3">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
                         </View>
                         <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                             <FontAwesome name="wheelchair" size={24} color="black"/>
-                            <Text className="pl-3">{toilet.accessible ? 'Yes' : 'No'}</Text>
+                            <Text className="text-black dark:text-white pl-3">{toilet.accessible ? 'Yes' : 'No'}</Text>
                         </View>
                         <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                             <FontAwesome name="intersex" size={24} color="black"/>
-                            <Text className="pl-3">{toilet.unisex ? 'Yes' : 'No'}</Text>
+                            <Text className="text-black dark:text-white pl-3">{toilet.unisex ? 'Yes' : 'No'}</Text>
                         </View>
                     </View>
 

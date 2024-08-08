@@ -24,14 +24,14 @@ const SettingsScreen = () => {
                 <FontAwesome name="arrow-left" size={30} />
             </TouchableOpacity>
             <View className="flex-row justify-between items-center w-full mb-4">
-                <Text className="text-lg dark:text-white">Dark Mode</Text>
+                <Text className="text-black dark:text-white text-lg">Dark Mode</Text>
                 <Switch
                     value={colorScheme === 'dark'}
                     onValueChange={toggleDarkMode}
                 />
             </View>
             <TouchableOpacity className="bg-red-500 p-4 rounded-md" onPress={deleteData}>
-                <Text className="text-white">Delete Data</Text>
+                <Text className="text-black dark:text-white">Delete Data</Text>
             </TouchableOpacity>
         </View>
     );

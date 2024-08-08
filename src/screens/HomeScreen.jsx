@@ -83,8 +83,8 @@ const HomeScreen = () => {
             {loading ? (
                 <View className="flex-1 justify-center items-center">
                     <ActivityIndicator size="large" color="#0000ff" />
-                    <Text className="mt-5">{statusMsg}</Text>
-                    <Text className="absolute bottom-5">Disclaimer: Not many toilets known to database.</Text>
+                    <Text className="text-black dark:text-white mt-5">{statusMsg}</Text>
+                    <Text className="text-black dark:text-white absolute bottom-5">Disclaimer: Not many toilets known to database.</Text>
                 </View>
             ) : (
                 <View className="flex-1">

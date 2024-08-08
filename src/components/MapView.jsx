@@ -49,13 +49,13 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
                         pinColor={toilet.accessible ? 'blue' : toilet.unisex ? 'purple' : 'red'}
                         onPress={() => onSelectToilet(toilet)}
                     >
-                        <Callout onPress={viewDetails}>
-                            <View className="flex-1 p-2">
-                                <Text className="font-bold text-center">{toilet.name}</Text>
-                                <Text>{`${toilet.street}, ${toilet.city}`}</Text>
+                        <Callout onPress={viewDetails} tooltip={true}>
+                            <View className="flex-1 p-3 bg-bgLight dark:bg-bgDark justify-center items-center rounded-lg border-white border">
+                                <Text className="text-black dark:text-white font-bold text-center">{toilet.name}</Text>
+                                <Text className="text-black dark:text-white">{`${toilet.street}, ${toilet.city}`}</Text>
 
                                 <TouchableOpacity className="mt-2 bg-blue-400 rounded">
-                                    <Text className="m-2 text-center">More Info</Text>
+                                    <Text className="text-black dark:text-white m-2 text-center">More Info</Text>
                                 </TouchableOpacity>
                             </View>
                         </Callout>

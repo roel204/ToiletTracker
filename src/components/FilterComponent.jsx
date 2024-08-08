@@ -26,14 +26,14 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
     return (
         <View className="flex-1 flex-row justify-evenly items-center border-t-2 border-black">
             <View className="flex-1 w-24 items-center">
-                <Text className="text-center font-bold">Accessible</Text>
+                <Text className="text-black dark:text-white text-center font-bold">Accessible</Text>
                 <Switch
                     value={accessibleFilter}
                     onValueChange={toggleAccessibleFilter}
                 />
             </View>
             <View className="flex-1 w-24 items-center">
-                <Text className="text-center font-bold">Unisex</Text>
+                <Text className="text-black dark:text-white text-center font-bold">Unisex</Text>
                 <Switch
                     value={unisexFilter}
                     onValueChange={toggleUnisexFilter}

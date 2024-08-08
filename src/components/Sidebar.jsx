@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import FilterComponent from "./FilterComponent";
 import { FontAwesome } from '@expo/vector-icons';
+import {DarkModeContext} from "../context/DarkModeContext";
 
 const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
+    const { colorScheme } = useContext(DarkModeContext);
     const navigation = useNavigation();
     const [accessibleFilter, setAccessibleFilter] = useState(false);
     const [unisexFilter, setUnisexFilter] = useState(false);
@@ -34,18 +36,18 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
                         toggleSidebar()
                     }}>
                         <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">
-                            <Text className="font-bold pb-2" numberOfLines={1} ellipsizeMode="tail">
+                            <Text className="text-black dark:text-white font-bold pb-2" numberOfLines={1} ellipsizeMode="tail">
                                 {toilet.name}
                             </Text>
 
                             <View className="flex-row items-center">
-                                <FontAwesome name="compass" size={20} color="black" />
-                                <Text className="pl-1 text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
+                                <FontAwesome name="compass" size={20} color={colorScheme === 'light' ? 'black' : 'white'} />
+                                <Text className="text-black dark:text-white pl-1 text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
                             </View>
 
                             <View className="absolute bottom-1 right-2 p-2 flex-row space-x-2">
-                                {toilet.accessible && <FontAwesome name="wheelchair" size={20} color="black"/>}
-                                {toilet.unisex && <FontAwesome name="intersex" size={20} color="black"/>}
+                                {toilet.accessible && <FontAwesome name="wheelchair" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
+                                {toilet.unisex && <FontAwesome name="intersex" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
                             </View>
                         </View>
 
