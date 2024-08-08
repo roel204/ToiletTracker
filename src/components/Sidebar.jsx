@@ -5,7 +5,7 @@ import FilterComponent from "./FilterComponent";
 import { FontAwesome } from '@expo/vector-icons';
 import {DarkModeContext} from "../context/DarkModeContext";
 
-const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
+const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => {
     const { colorScheme } = useContext(DarkModeContext);
     const navigation = useNavigation();
     const [accessibleFilter, setAccessibleFilter] = useState(false);
@@ -32,7 +32,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
             <ScrollView className="p-2">
                 {filteredToilets.map(toilet => (
                     <TouchableOpacity key={toilet.id} onPress={() => {
-                        onSelectToilet(toilet)
+                        setSelectedToilet(toilet)
                         toggleSidebar()
                     }}>
                         <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">
