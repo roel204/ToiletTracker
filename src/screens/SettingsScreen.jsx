@@ -52,7 +52,7 @@ const SettingsScreen = () => {
                 </View>
                 <View className="flex-row items-center justify-between p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                     <Text className="text-black dark:text-white text-lg">Delete All Data</Text>
-                    <TouchableOpacity className="bg-red-500 p-4 rounded-md" onPress={confirmDelete}><Text>DELETE</Text></TouchableOpacity>
+                    <TouchableOpacity className="bg-red-500 p-4 rounded-md" onPress={confirmDelete}><Text className="text-black dark:text-white">DELETE</Text></TouchableOpacity>
                 </View>
             </View>
         </View>
