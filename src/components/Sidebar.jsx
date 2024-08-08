@@ -2,11 +2,11 @@ import React, {useState, useContext} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import FilterComponent from "./FilterComponent";
-import { FontAwesome } from '@expo/vector-icons';
+import {FontAwesome} from '@expo/vector-icons';
 import {DarkModeContext} from "../context/DarkModeContext";
 
 const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => {
-    const { colorScheme } = useContext(DarkModeContext);
+    const {colorScheme} = useContext(DarkModeContext);
     const navigation = useNavigation();
     const [accessibleFilter, setAccessibleFilter] = useState(false);
     const [unisexFilter, setUnisexFilter] = useState(false);
@@ -19,44 +19,49 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => 
     });
 
     return (
-        <View className="flex-1 h-full w-3/4 bg-bgLight dark:bg-bgDark border-r-2 border-black">
-            <View className="flex-row justify-between h-[10vh]">
-                <View  className="justify-center top-3 h-12 w-12 rounded-3xl"/>
-                <TouchableOpacity className="justify-center items-center top-3 h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Settings')}>
-                    <FontAwesome name="gear" size={30} />
-                </TouchableOpacity>
-                <TouchableOpacity className="justify-center items-center top-3 right-3 h-12 w-12 bg-white rounded-3xl" onPress={reloadToilets}>
-                    <FontAwesome name="rotate-right" size={30} color="black" />
-                </TouchableOpacity>
-            </View>
-            <ScrollView className="p-2">
-                {filteredToilets.map(toilet => (
-                    <TouchableOpacity key={toilet.id} onPress={() => {
-                        setSelectedToilet(toilet)
-                        toggleSidebar()
-                    }}>
-                        <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">
-                            <Text className="text-black dark:text-white font-bold pb-2" numberOfLines={1} ellipsizeMode="tail">
-                                {toilet.name}
-                            </Text>
-
-                            <View className="flex-row items-center">
-                                <FontAwesome name="compass" size={20} color={colorScheme === 'light' ? 'black' : 'white'} />
-                                <Text className="text-black dark:text-white pl-1 text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
-                            </View>
-
-                            <View className="absolute bottom-1 right-2 p-2 flex-row space-x-2">
-                                {toilet.accessible && <FontAwesome name="wheelchair" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
-                                {toilet.unisex && <FontAwesome name="intersex" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
-                            </View>
-                        </View>
-
+        <View className="flex-1 flex-row">
+            <View className="flex-1 h-full w-3/4 bg-bgLight dark:bg-bgDark border-r-2 border-black">
+                <View className="flex-row justify-between h-[10vh]">
+                    <View className="justify-center top-3 h-12 w-12 rounded-3xl"/>
+                    <TouchableOpacity className="justify-center items-center top-3 h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Settings')}>
+                        <FontAwesome name="gear" size={30}/>
                     </TouchableOpacity>
-                ))}
-            </ScrollView>
-            <View className="h-[12vh]">
-                <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter}/>
+                    <TouchableOpacity className="justify-center items-center top-3 right-3 h-12 w-12 bg-white rounded-3xl" onPress={reloadToilets}>
+                        <FontAwesome name="rotate-right" size={30} color="black"/>
+                    </TouchableOpacity>
+                </View>
+                <ScrollView className="p-2">
+                    {filteredToilets.map(toilet => (
+                        <TouchableOpacity key={toilet.id} onPress={() => {
+                            setSelectedToilet(toilet)
+                            toggleSidebar()
+                        }}>
+                            <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">
+                                <Text className="text-black dark:text-white font-bold pb-2" numberOfLines={1} ellipsizeMode="tail">
+                                    {toilet.name}
+                                </Text>
+
+                                <View className="flex-row items-center">
+                                    <FontAwesome name="compass" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>
+                                    <Text className="text-black dark:text-white pl-1 text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
+                                </View>
+
+                                <View className="absolute bottom-1 right-2 p-2 flex-row space-x-2">
+                                    {toilet.accessible && <FontAwesome name="wheelchair" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
+                                    {toilet.unisex && <FontAwesome name="intersex" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
+                                </View>
+                            </View>
+
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+                <View className="h-[12vh]">
+                    <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter}/>
+                </View>
             </View>
+            <TouchableOpacity className="h-full w-1/4" onPress={toggleSidebar} >
+
+            </TouchableOpacity>
         </View>
     );
 };
