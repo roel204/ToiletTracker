@@ -35,7 +35,7 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
                     }}>
                         <View className="mb-2 p-2 border rounded-md">
                             <Text className="font-bold">{toilet.name}</Text>
-                            <Text className="text-sm">{toilet.distance.toFixed(1)} km</Text>
+                            <Text className="text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
                             <Text className="text-sm">{toilet.accessible ? '♿' : ''} {toilet.unisex ? '⚧' : ''}</Text>
                         </View>
                     </TouchableOpacity>

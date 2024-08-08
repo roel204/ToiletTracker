@@ -23,17 +23,17 @@ const DetailScreen = ({route, navigation}) => {
                     </View>
                     <View className="flex-row items-center p-3 bg-backLight rounded-lg">
                         <FontAwesome name="location-arrow" size={24} color="black"/>
-                        <Text className="pl-5">{toilet.directions}</Text>
+                        <Text className="pl-5">{toilet.directions ? toilet.directions : "No Directions"}</Text>
                     </View>
                     <View className="flex-row items-center p-3 bg-backLight rounded-lg">
                         <FontAwesome name="comment" size={24} color="black"/>
-                        <Text className="pl-5">{toilet.comment}</Text>
+                        <Text className="pl-5">{toilet.comment ? toilet.comment : "No Comment"}</Text>
                     </View>
 
                     <View className="flex-row justify-between">
                         <View className="flex-row items-center p-3 bg-backLight rounded-lg">
                             <FontAwesome name="compass" size={24} color="black"/>
-                            <Text className="pl-3">{toilet.distance.toFixed(1)} km</Text>
+                            <Text className="pl-3">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
                         </View>
                         <View className="flex-row items-center p-3 bg-backLight rounded-lg">
                             <FontAwesome name="wheelchair" size={24} color="black"/>

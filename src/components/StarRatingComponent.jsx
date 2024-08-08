@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import StarRating from 'react-native-star-rating-widget';
 import {getData, storeData, removeData} from '../hooks/useLocalStorage';
-import {Alert, Share, TouchableOpacity, View} from "react-native";
+import {Alert, Share, TouchableOpacity} from "react-native";
 import {FontAwesome} from "@expo/vector-icons";
 
 const StarRatingComponent = ({toilet}) => {
