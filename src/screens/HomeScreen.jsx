@@ -8,6 +8,7 @@ import {FontAwesome} from "@expo/vector-icons";
 
 const HomeScreen = () => {
     const [loading, setLoading] = useState(true);
+    const [statusMsg, setStatusMsg] = useState("");
 
     const [location, setLocation] = useState({});
     const [toilets, setToilets] = useState([]);
@@ -42,6 +43,7 @@ const HomeScreen = () => {
     useEffect(() => {
         // Get permission to track location
         (async () => {
+            setStatusMsg("Getting permission to track location.")
             let {status} = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 Alert.alert('Permission to access location was denied');
@@ -49,10 +51,12 @@ const HomeScreen = () => {
             }
 
             // Get the location
+            setStatusMsg("Getting your location.")
             let newLocation = await Location.getCurrentPositionAsync({});
             setLocation(newLocation);
 
             // Fetch the toilets
+            setStatusMsg("Finding nearby toilets.")
             setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
             setLoading(false);
         })();
@@ -62,10 +66,12 @@ const HomeScreen = () => {
         (async () => {
             setLoading(true);
 
+            setStatusMsg("Getting your location.")
             let newLocation = await Location.getCurrentPositionAsync({});
             setLocation(newLocation);
 
-            setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
+            setStatusMsg("Finding nearby toilets.")
+            await setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
             setLoading(false);
         })();
     }
@@ -77,6 +83,8 @@ const HomeScreen = () => {
             {loading ? (
                 <View className="flex-1 justify-center items-center">
                     <ActivityIndicator size="large" color="#0000ff" />
+                    <Text className="mt-5">{statusMsg}</Text>
+                    <Text className="absolute bottom-5">Disclaimer: Not many toilets known to database.</Text>
                 </View>
             ) : (
                 <View className="flex-1">

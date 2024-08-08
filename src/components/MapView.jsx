@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import MapView, {Callout, Marker} from 'react-native-maps';
 import { DarkModeContext } from '../context/DarkModeContext';
 import mapStyleDark from '../../assets/mapStyles/mapStyleDark.json';
@@ -51,9 +51,9 @@ const MapViewComponent = ({toilets, onSelectToilet, userLocation, selectedToilet
                                 <Text className="font-bold text-center">{toilet.name}</Text>
                                 <Text>{`${toilet.street}, ${toilet.city}`}</Text>
 
-                                <Pressable className="mt-2 bg-blue-400 rounded">
+                                <TouchableOpacity className="mt-2 bg-blue-400 rounded">
                                     <Text className="m-2 text-center">More Info</Text>
-                                </Pressable>
+                                </TouchableOpacity>
                             </View>
                         </Callout>
                     </Marker>
