@@ -28,6 +28,8 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
             <View className="flex-1 w-24 items-center">
                 <Text className="text-black dark:text-white text-center font-bold">Accessible</Text>
                 <Switch
+                    // trackColor={{false: '#1e293b', true: '#06b6d4'}}
+                    // thumbColor={accessibleFilter ? '#22d3ee' : '#334155'}
                     value={accessibleFilter}
                     onValueChange={toggleAccessibleFilter}
                 />
@@ -35,6 +37,8 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
             <View className="flex-1 w-24 items-center">
                 <Text className="text-black dark:text-white text-center font-bold">Unisex</Text>
                 <Switch
+                    // trackColor={{false: '#1e293b', true: '#06b6d4'}}
+                    // thumbColor={unisexFilter ? '#22d3ee' : '#334155'}
                     value={unisexFilter}
                     onValueChange={toggleUnisexFilter}
                 />
