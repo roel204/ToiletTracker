@@ -17,8 +17,8 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
     });
 
     return (
-        <View className="flex-1 h-full w-3/4 bg-blue-50 dark:bg-blue-950 border-r-2 border-black">
-            <View className="flex-row justify-between h-[10vh] border-b-2 border-black">
+        <View className="flex-1 h-full w-3/4 bg-bgLight dark:bg-bgDark border-r-2 border-black">
+            <View className="flex-row justify-between h-[10vh]">
                 <View  className="justify-center top-3 h-12 w-12 rounded-3xl"/>
                 <TouchableOpacity className="justify-center items-center top-3 h-12 w-12 bg-white rounded-3xl" onPress={() => navigation.navigate('Settings')}>
                     <FontAwesome name="gear" size={30} />
@@ -33,11 +33,22 @@ const Sidebar = ({toilets, onSelectToilet, toggleSidebar, reloadToilets}) => {
                         onSelectToilet(toilet)
                         toggleSidebar()
                     }}>
-                        <View className="mb-2 p-2 border rounded-md">
-                            <Text className="font-bold">{toilet.name}</Text>
-                            <Text className="text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
-                            <Text className="text-sm">{toilet.accessible ? '♿' : ''} {toilet.unisex ? '⚧' : ''}</Text>
+                        <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">
+                            <Text className="font-bold pb-2" numberOfLines={1} ellipsizeMode="tail">
+                                {toilet.name}
+                            </Text>
+
+                            <View className="flex-row items-center">
+                                <FontAwesome name="compass" size={20} color="black" />
+                                <Text className="pl-1 text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
+                            </View>
+
+                            <View className="absolute bottom-1 right-2 p-2 flex-row space-x-2">
+                                {toilet.accessible && <FontAwesome name="wheelchair" size={20} color="black"/>}
+                                {toilet.unisex && <FontAwesome name="intersex" size={20} color="black"/>}
+                            </View>
                         </View>
+
                     </TouchableOpacity>
                 ))}
             </ScrollView>

@@ -1,18 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      'bgLight': '#ffffff',
-      'bgDark': '#3f3cbb',
-      'backLight': '#dadada',
-      'backDark': '#565656',
+    darkMode: 'selector',
+    content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
+    theme: {
+        extend: {
+            colors: {
+                transparent: 'transparent',
+                current: 'currentColor',
+                'bgLight': '#eff6ff',
+                'bgDark': '#1e293b',
+                'panelLight': '#cbd5e1',
+                'panelDark': '#29344d',
+            },
+        },
     },
-    extend: {},
-  },
-  plugins: [],
+    plugins: [],
 }
 
