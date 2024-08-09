@@ -11,7 +11,27 @@ const fetchToilets = async (lat, lng) => {
 
     try {
         const response = await fetch(url, options);
-        return await response.json();
+        const toilets = await response.json();
+
+        // Add an extra toilet for testing
+        const extraToilet = {
+            id: "test-toilet-1",
+            name: "Test Toilet",
+            street: "Test Street 123",
+            city: "Vlaardingen",
+            latitude: 51.909845,
+            longitude: 4.346065,
+            accessible: true,
+            unisex: false,
+            directions: "Located near the test building.",
+            comment: "This is a test toilet for development purposes.",
+            distance: 69,
+        };
+
+        // Add test toilet to the array
+        toilets.push(extraToilet);
+
+        return toilets;
     } catch (error) {
         console.error(error);
         return [];

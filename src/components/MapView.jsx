@@ -10,10 +10,22 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
     const navigation = useNavigation();
     const {colorScheme} = useContext(DarkModeContext);
     const markerRefs = useRef({});
+    const mapRef = useRef(null);
 
-    // Automatically open the Callout if a toilet has been selected
+    // Automatically go to toilet & open the Callout if a toilet has been selected
     useEffect(() => {
         if (selectedToilet && markerRefs.current[selectedToilet.id]) {
+
+            // Animate the map to marker position
+            if (mapRef.current) {
+                mapRef.current.animateToRegion({
+                    latitude: selectedToilet.latitude,
+                    longitude: selectedToilet.longitude,
+                    latitudeDelta: 0.02,
+                    longitudeDelta: 0.01,
+                }, 400);
+            }
+            // Show Callout
             markerRefs.current[selectedToilet.id].showCallout();
         }
     }, [selectedToilet]);
@@ -30,26 +42,20 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
         <View className="flex-1">
             <MapView
                 className="flex-1"
+                ref={mapRef}
                 initialRegion={{
                     latitude: userLocation?.coords.latitude || 50,
                     longitude: userLocation?.coords.longitude || 4,
-                    latitudeDelta: 0.05,
-                    longitudeDelta: 0.02,
+                    latitudeDelta: 0.02,
+                    longitudeDelta: 0.01,
                 }}
                 provider={"google"}
                 showsUserLocation={true}
                 showsCompass={false}
                 rotateEnabled={false}
                 pitchEnabled={false}
+                moveOnMarkerPress={false}
                 customMapStyle={colorScheme === 'dark' ? mapStyleDark : mapStyleLight} // Select custom light/dark theme
-
-                // Change the region if a new toilet has been selected
-                region={{
-                    latitude: selectedToilet?.latitude,
-                    longitude: selectedToilet?.longitude,
-                    latitudeDelta: 0.05,
-                    longitudeDelta: 0.02,
-                }}
             >
                 {safeToilets.map(toilet => (
                     // Map each marker on the map
@@ -57,8 +63,12 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                         key={toilet.id}
                         coordinate={{latitude: toilet.latitude, longitude: toilet.longitude}}
                         opacity={0.8}
+                        isPreselected={true}
                         pinColor={toilet.accessible ? 'blue' : toilet.unisex ? 'purple' : 'red'} // Custom pin colors
-                        onPress={() => setSelectedToilet(toilet)} // Select the toilet when the marker has been pressed
+                        onPress={() => {
+                            // Select the toilet when the marker has been pressed
+                            setSelectedToilet(toilet)
+                        }}
                         ref={(ref) => {
                             // Create refs to open the callouts using code
                             markerRefs.current[toilet.id] = ref;
