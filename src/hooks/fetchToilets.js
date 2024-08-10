@@ -25,7 +25,7 @@ const fetchToilets = async (lat, lng) => {
             unisex: false,
             directions: "Located near the test building.",
             comment: "This is a test toilet for development purposes.",
-            distance: 69,
+            distance: 0.1,
         };
 
         // Add test toilet to the array

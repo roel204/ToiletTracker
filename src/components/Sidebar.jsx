@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import FilterComponent from "./FilterComponent";
 import {FontAwesome} from '@expo/vector-icons';
 import {DarkModeContext} from "../context/DarkModeContext";
+import StarCountComponent from "./StarCountComponent";
 
 const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, movemap, setMoveMap}) => {
     const {colorScheme} = useContext(DarkModeContext);
@@ -51,7 +52,7 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, move
                             <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">
 
                                 {/*Name*/}
-                                <Text className="text-black dark:text-white font-bold pb-2" numberOfLines={1} ellipsizeMode="tail">
+                                <Text className="text-black dark:text-white font-bold pb-4 w-[85%]" numberOfLines={1} ellipsizeMode="tail">
                                     {toilet.name}
                                 </Text>
 
@@ -61,13 +62,17 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, move
                                     <Text className="text-black dark:text-white pl-1 text-sm">{(toilet.distance * 1.60934).toFixed(1)} km</Text>
                                 </View>
 
+                                {/*Star count*/}
+                                <View className="absolute top-3 right-3">
+                                    <StarCountComponent toiletId={toilet.id} />
+                                </View>
+
                                 {/*Accessible & Unisex icon*/}
                                 <View className="absolute bottom-1 right-2 p-2 flex-row space-x-2">
                                     {toilet.accessible && <FontAwesome name="wheelchair" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
                                     {toilet.unisex && <FontAwesome name="intersex" size={20} color={colorScheme === 'light' ? 'black' : 'white'}/>}
                                 </View>
                             </View>
-
                         </TouchableOpacity>
                     ))}
                 </ScrollView>

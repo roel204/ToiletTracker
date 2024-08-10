@@ -41,7 +41,7 @@ const StarRatingComponent = ({toilet}) => {
 
     return (
         <>
-            <StarRating rating={rating} onChange={setRating} starSize={40}/>
+            <StarRating rating={rating} onChange={setRating} starSize={40} enableHalfStar={false}/>
             <TouchableOpacity className="p-4 rounded-md" onPress={shareRating}>
                 <FontAwesome name="share-alt" size={24} color={colorScheme === 'light' ? 'black' : 'white'}/>
             </TouchableOpacity>
