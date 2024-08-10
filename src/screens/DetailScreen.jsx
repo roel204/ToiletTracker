@@ -27,25 +27,25 @@ const DetailScreen = ({route, navigation}) => {
 
                         {/*Name*/}
                         <View className="flex-row justify-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
-                            <Text className="flex-1 text-center text-black dark:text-white font-bold ">{toilet.name}</Text>
+                            <Text className="flex-1 text-center text-black dark:text-white font-bold" numberOfLines={2} ellipsizeMode="tail">{toilet.name}</Text>
                         </View>
 
                         {/*Location*/}
                         <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                             <FontAwesome name="map-marker" size={25} color={colorScheme === 'light' ? 'black' : 'white'}/>
-                            <Text className="flex-1 text-black dark:text-white pl-5 pr-2">{toilet.street + ", " + toilet.city}</Text>
+                            <Text className="flex-1 text-black dark:text-white pl-5 pr-2" numberOfLines={2} ellipsizeMode="tail">{toilet.street + ", " + toilet.city}</Text>
                         </View>
 
                         {/*Directions*/}
                         <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                             <FontAwesome name="location-arrow" size={24} color={colorScheme === 'light' ? 'black' : 'white'}/>
-                            <Text className="flex-1 text-black dark:text-white pl-5 pr-2">{toilet.directions ? toilet.directions : "No Directions"}</Text>
+                            <Text className="flex-1 text-black dark:text-white pl-5 pr-2" numberOfLines={4} ellipsizeMode="tail">{toilet.directions ? toilet.directions : "No Directions"}</Text>
                         </View>
 
                         {/*Comment*/}
                         <View className="flex-row items-center p-3 bg-panelLight dark:bg-panelDark rounded-lg">
                             <FontAwesome name="comment" size={22} color={colorScheme === 'light' ? 'black' : 'white'}/>
-                            <Text className="flex-1 text-black dark:text-white pl-5 pr-2">{toilet.comment ? toilet.comment : "No Comment"}</Text>
+                            <Text className="flex-1 text-black dark:text-white pl-5 pr-2" numberOfLines={4} ellipsizeMode="tail">{toilet.comment ? toilet.comment : "No Comment"}</Text>
                         </View>
 
                         <View className="flex-row justify-between">

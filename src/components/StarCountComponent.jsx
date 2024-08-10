@@ -13,7 +13,7 @@ const starCountComponents = ({toiletId}) => {
             if (ratingData !== null) {
                 setRating(ratingData)
             } else {
-                setRating("?")
+                setRating("-")
             }
         })();
     }, []);
