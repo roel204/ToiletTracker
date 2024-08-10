@@ -30,7 +30,7 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
         <View className="flex-1 flex-row justify-evenly items-center border-t-2">
 
             {/*Accessibe switch*/}
-            <View className="w-24 items-center justify-center p-1 bg-panelLight dark:bg-panelDark rounded-lg">
+            <View className="w-[40%] items-center">
                 <Text className="text-black dark:text-white text-center font-bold">Accessible</Text>
                 <Switch
                     // trackColor={{false: '#1e293b', true: '#06b6d4'}}
@@ -41,7 +41,7 @@ const FilterComponent = ({accessibleFilter, setAccessibleFilter, unisexFilter, s
             </View>
 
             {/*Unisex Switch*/}
-            <View className="w-24 items-center justify-center p-1 bg-panelLight dark:bg-panelDark rounded-lg">
+            <View className="w-[40%] items-center">
                 <Text className="text-black dark:text-white text-center font-bold">Unisex</Text>
                 <Switch
                     // trackColor={{false: '#1e293b', true: '#06b6d4'}}

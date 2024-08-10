@@ -78,7 +78,7 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, move
                 </ScrollView>
 
                 {/*Filter component*/}
-                <View className="h-[12vh]">
+                <View className="h-[11vh]">
                     <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter}/>
                 </View>
             </View>
