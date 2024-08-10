@@ -4,7 +4,7 @@
     "slug": "ToiletTracker",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ToiletTrackerIcon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/ToiletTrackerIcon.png",
@@ -18,10 +18,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/ToiletTrackerIcon.png",
         "backgroundColor": "#cbd5e1"
-      }
+      },
+      "package": "com.roel204.ToiletTracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d3041960-db01-456c-8e41-b70a411fc976"
+      }
     }
   }
 }

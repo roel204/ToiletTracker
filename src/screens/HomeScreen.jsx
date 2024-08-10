@@ -13,6 +13,7 @@ const HomeScreen = () => {
     const [location, setLocation] = useState({});
     const [toilets, setToilets] = useState([]);
     const [selectedToilet, setSelectedToilet] = useState({});
+    const [moveMap, setMoveMap] = useState(0)
 
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const [sidebarAnimation] = useState(new Animated.Value(-300));
@@ -92,12 +93,12 @@ const HomeScreen = () => {
                     </TouchableOpacity>
 
                     {/*MapView*/}
-                    <MapViewComponent toilets={toilets} userLocation={location} selectedToilet={selectedToilet} setSelectedToilet={setSelectedToilet}/>
+                    <MapViewComponent toilets={toilets} userLocation={location} selectedToilet={selectedToilet} setSelectedToilet={setSelectedToilet} movemap={moveMap} setMoveMap={setMoveMap}/>
 
                     {/*Sidebar*/}
                     {sidebarVisible && (
                         <Animated.View style={{transform: [{translateX: sidebarAnimation}]}} className="absolute top-0 bottom-0 left-0 right-0 z-40">
-                            <Sidebar toilets={toilets} toggleSidebar={toggleSidebar} reloadToilets={reloadToilets} setSelectedToilet={setSelectedToilet}/>
+                            <Sidebar toilets={toilets} toggleSidebar={toggleSidebar} reloadToilets={reloadToilets} setSelectedToilet={setSelectedToilet} movemap={moveMap} setMoveMap={setMoveMap}/>
                         </Animated.View>
                     )}
                 </View>

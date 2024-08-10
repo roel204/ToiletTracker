@@ -5,7 +5,7 @@ import FilterComponent from "./FilterComponent";
 import {FontAwesome} from '@expo/vector-icons';
 import {DarkModeContext} from "../context/DarkModeContext";
 
-const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => {
+const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, movemap, setMoveMap}) => {
     const {colorScheme} = useContext(DarkModeContext);
     const navigation = useNavigation();
     const [accessibleFilter, setAccessibleFilter] = useState(false);
@@ -45,6 +45,7 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet}) => 
                         // Select the toilet and close the sidebar
                         <TouchableOpacity key={toilet.id} onPress={() => {
                             setSelectedToilet(toilet);
+                            setMoveMap(!movemap)
                             toggleSidebar();
                         }}>
                             <View className="mb-2 p-3 bg-panelLight dark:bg-panelDark rounded-lg relative">

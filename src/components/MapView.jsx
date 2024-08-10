@@ -6,7 +6,7 @@ import mapStyleDark from '../../assets/mapStyles/mapStyleDark.json';
 import mapStyleLight from '../../assets/mapStyles/mapStyleLight.json';
 import {useNavigation} from "@react-navigation/native";
 
-const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToilet}) => {
+const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToilet, movemap, setMoveMap}) => {
     const navigation = useNavigation();
     const {colorScheme} = useContext(DarkModeContext);
     const markerRefs = useRef({});
@@ -28,7 +28,7 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
             // Show Callout
             markerRefs.current[selectedToilet.id].showCallout();
         }
-    }, [selectedToilet]);
+    }, [selectedToilet, movemap]);
 
     // Navigate to the detail page
     const viewDetails = () => {
@@ -68,6 +68,7 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                         onPress={() => {
                             // Select the toilet when the marker has been pressed
                             setSelectedToilet(toilet)
+                            setMoveMap(!movemap)
                         }}
                         ref={(ref) => {
                             // Create refs to open the callouts using code
