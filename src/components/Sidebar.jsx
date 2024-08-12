@@ -25,7 +25,7 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, move
             <View className="flex-1 h-full w-3/4 bg-bgLight dark:bg-bgDark border-r-2 border-black">
 
                 {/*Top bar*/}
-                <View className="flex-row justify-between h-[10vh]">
+                <View className="flex-row justify-between h-[70px]">
                     {/*Empty view for spacing purposes*/}
                     <View className="justify-center top-3 h-12 w-12 rounded-3xl"/>
 
@@ -78,7 +78,7 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, move
                 </ScrollView>
 
                 {/*Filter component*/}
-                <View className="h-[11vh]">
+                <View className="h-20">
                     <FilterComponent setAccessibleFilter={setAccessibleFilter} setUnisexFilter={setUnisexFilter} accessibleFilter={accessibleFilter} unisexFilter={unisexFilter}/>
                 </View>
             </View>

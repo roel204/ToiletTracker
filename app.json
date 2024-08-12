@@ -19,7 +19,11 @@
         "foregroundImage": "./assets/ToiletTrackerIcon.png",
         "backgroundColor": "#cbd5e1"
       },
-      "package": "com.roel204.ToiletTracker"
+      "package": "com.roel204.ToiletTracker",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
