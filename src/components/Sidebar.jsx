@@ -40,7 +40,7 @@ const Sidebar = ({toilets, toggleSidebar, reloadToilets, setSelectedToilet, move
                     </TouchableOpacity>
                 </View>
 
-                {/*ScrollView with all the items inide*/}
+                {/*ScrollView with all the items inside*/}
                 <ScrollView className="p-2">
                     {filteredToilets.map(toilet => (
                         // Select the toilet and close the sidebar

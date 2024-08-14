@@ -39,8 +39,8 @@ const HomeScreen = () => {
 
     // useEffect to initialize the app, also set status message to show progress to the user
     useEffect(() => {
-        // Get permission to track location
         (async () => {
+            // Get permission to track location
             setStatusMsg("Getting permission to track location.")
             let {status} = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
@@ -65,10 +65,12 @@ const HomeScreen = () => {
         (async () => {
             setLoading(true);
 
+            // Get the location again
             setStatusMsg("Getting your location.")
             let newLocation = await Location.getCurrentPositionAsync({});
             setLocation(newLocation);
 
+            // Get the toilets again
             setStatusMsg("Finding nearby toilets.")
             await setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
             setLoading(false);

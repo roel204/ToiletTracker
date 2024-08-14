@@ -71,7 +71,7 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                             setMoveMap(!movemap)
                         }}
                         ref={(ref) => {
-                            // Create refs to open the callouts using code
+                            // Refs to open the callouts using code
                             markerRefs.current[toilet.id] = ref;
                         }}
                     >
@@ -82,7 +82,7 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                                 <Text className="text-black dark:text-white font-bold text-center">{toilet.name}</Text>
                                 <Text className="text-black dark:text-white">{`${toilet.street}, ${toilet.city}`}</Text>
 
-                                {/*Button to open detail view (Button doesnt do anything, click is handled by the whole callout)*/}
+                                {/*Button to open detail view (Button doesnt do anything, click is handled by the whole callout because buttons dont work in callouts)*/}
                                 <TouchableOpacity className="mt-2 w-full bg-blue-400 rounded">
                                     <Text className="text-black dark:text-white m-2 text-center">More Info</Text>
                                 </TouchableOpacity>

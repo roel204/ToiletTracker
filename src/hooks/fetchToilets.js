@@ -13,7 +13,7 @@ const fetchToilets = async (lat, lng) => {
         const response = await fetch(url, options);
         const toilets = await response.json();
 
-        // Add an extra toilet for testing
+        // Extra toilet for testing
         const extraToilet = {
             id: "test-toilet-1",
             name: "Test Toilet",
