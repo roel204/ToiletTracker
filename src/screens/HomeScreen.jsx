@@ -40,25 +40,34 @@ const HomeScreen = () => {
     // useEffect to initialize the app, also set status message to show progress to the user
     useEffect(() => {
         (async () => {
-            // Get permission to track location
-            setStatusMsg("Getting permission to track location.")
-            let {status} = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                Alert.alert('Permission to access location was denied');
-                return;
+            try {
+                // Get permission to track location
+                setStatusMsg("Getting permission to track location.");
+                let {status} = await Location.requestForegroundPermissionsAsync();
+                if (status !== 'granted') {
+                    Alert.alert('Permission to access location was denied');
+                    return;
+                }
+
+                // Get the location
+                setStatusMsg("Getting your location.");
+                let newLocation = await Location.getCurrentPositionAsync({});
+                setLocation(newLocation);
+
+                // Fetch the toilets
+                setStatusMsg("Finding nearby toilets.");
+                const toilets = await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude);
+                setToilets(toilets);
+
+            } catch (error) {
+                console.error('Error during initialization:', error);
+                Alert.alert('Something went wrong', 'We were unable to initialize the app. Please try again later.');
+            } finally {
+                setLoading(false);
             }
-
-            // Get the location
-            setStatusMsg("Getting your location.")
-            let newLocation = await Location.getCurrentPositionAsync({});
-            setLocation(newLocation);
-
-            // Fetch the toilets
-            setStatusMsg("Finding nearby toilets.")
-            await setToilets(await fetchToilets(newLocation.coords.latitude, newLocation.coords.longitude));
-            setLoading(false);
         })();
     }, []);
+
 
     // Reload the toilets
     const reloadToilets = () => {
