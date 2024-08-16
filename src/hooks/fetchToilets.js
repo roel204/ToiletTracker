@@ -9,33 +9,37 @@ const fetchToilets = async (lat, lng) => {
         }
     };
 
+    let toilets = [];
+
+    // Extra toilet for testing
+    const extraToilet = {
+        id: 6942069,
+        name: "Test Toilet",
+        street: "Test Street 123",
+        city: "Vlaardingen",
+        latitude: 51.909845,
+        longitude: 4.346065,
+        accessible: true,
+        unisex: false,
+        directions: "Located near the test building.",
+        comment: "This is a test toilet for development purposes.",
+        distance: 0.1,
+    };
+
+    // Add test toilet to the array
+    toilets.push(extraToilet);
+
     try {
         const response = await fetch(url, options);
-        const toilets = await response.json();
+        const fetchedToilets = await response.json();
 
-        // Extra toilet for testing
-        const extraToilet = {
-            id: "test-toilet-1",
-            name: "Test Toilet",
-            street: "Test Street 123",
-            city: "Vlaardingen",
-            latitude: 51.909845,
-            longitude: 4.346065,
-            accessible: true,
-            unisex: false,
-            directions: "Located near the test building.",
-            comment: "This is a test toilet for development purposes.",
-            distance: 0.1,
-        };
-
-        // Add test toilet to the array
-        toilets.push(extraToilet);
-
-        return toilets;
+        // Add the fetched toilets to the array
+        toilets = toilets.concat(fetchedToilets);
     } catch (error) {
         console.error(error);
-        return [];
     }
+
+    return toilets;
 };
 
 export default fetchToilets;

@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Animated, ActivityIndicator, Alert} from 'react-native';
+import {View, TouchableOpacity, Animated, Alert} from 'react-native';
 import MapViewComponent from '../components/MapView';
 import Sidebar from '../components/Sidebar';
 import fetchToilets from '../hooks/fetchToilets';
 import * as Location from "expo-location";
 import {FontAwesome} from "@expo/vector-icons";
+import LoadingView from "../components/LoadingView";
 
 const HomeScreen = () => {
     const [loading, setLoading] = useState(true);
@@ -91,11 +92,7 @@ const HomeScreen = () => {
 
             {/*Loading screen*/}
             {loading ? (
-                <View className="flex-1 justify-center items-center">
-                    <ActivityIndicator size={80} color="#0000ff"/>
-                    <Text className="text-black dark:text-white mt-5">{statusMsg}</Text>
-                    <Text className="text-black dark:text-white absolute bottom-5">Disclaimer: Not many toilets known to database.</Text>
-                </View>
+                <LoadingView statusMsg={statusMsg} />
             ) : (
                 <View className="flex-1">
                     {/*Hamburger Button*/}

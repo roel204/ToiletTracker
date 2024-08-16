@@ -35,9 +35,6 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
         navigation.navigate('Details', {toilet: selectedToilet});
     }
 
-    // Safety check incase toilets have loaded incorrectly
-    const safeToilets = Array.isArray(toilets) ? toilets : [];
-
     return (
         <View className="flex-1">
             <MapView
@@ -57,7 +54,7 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                 moveOnMarkerPress={false}
                 customMapStyle={colorScheme === 'dark' ? mapStyleDark : mapStyleLight} // Select custom light/dark theme
             >
-                {safeToilets.map(toilet => (
+                {toilets.map(toilet => (
                     // Map each marker on the map
                     <Marker
                         key={toilet.id}
