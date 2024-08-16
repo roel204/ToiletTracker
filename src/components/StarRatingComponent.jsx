@@ -32,7 +32,7 @@ const StarRatingComponent = ({toilet}) => {
     const shareRating = async () => {
         try {
             await Share.share({
-                message: `I rate the toilet in ${toilet.name} ${rating} stars. `,
+                message: `I rate the toilet in ${toilet.name} ${toilet.city} ${rating} stars. `,
             });
         } catch (error) {
             Alert.alert(error.message);
