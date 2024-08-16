@@ -72,6 +72,7 @@ const MapViewComponent = ({toilets, userLocation, selectedToilet, setSelectedToi
                             markerRefs.current[toilet.id] = ref;
                         }}
                     >
+                        {/*Callout that opens when toilet has been selected*/}
                         <Callout onPress={viewDetails} tooltip={true}>
                             <View className="flex-1 p-3 bg-bgLight dark:bg-bgDark justify-center items-center rounded-lg border-white border">
 

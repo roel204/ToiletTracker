@@ -13,8 +13,10 @@ const App = () => {
 
     return (
         <DarkModeProvider>
+            {/*Safe area to prevent camera notches & notification bars from being in way*/}
             <SafeAreaView className="flex-1 bg-bgLight dark:bg-bgDark">
                 <NavigationContainer>
+                    {/*All routes*/}
                     <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
                         <Stack.Screen name="Home" component={HomeScreen} />
                         <Stack.Screen name="Settings" component={SettingsScreen} />
