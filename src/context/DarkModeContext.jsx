@@ -1,6 +1,7 @@
 import React, {createContext, useEffect} from 'react';
 import {getData, storeData} from '../hooks/useAsyncStorage';
 import {useColorScheme} from "nativewind";
+import {StatusBar} from "react-native";
 
 // Context to manage Dark Mode (Make sure tailwind.config.js has "darkMode: 'selector',")
 export const DarkModeContext = createContext();
@@ -31,6 +32,11 @@ export const DarkModeProvider = ({children}) => {
     // Return the current colorScheme and toggle function to be used by the children
     return (
         <DarkModeContext.Provider value={{colorScheme, toggleDarkMode}}>
+            {/*Change the color of the staus bar*/}
+            <StatusBar
+                barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+                backgroundColor={colorScheme === 'dark' ? '#1e293b' : '#eff6ff'}
+            />
             {children}
         </DarkModeContext.Provider>
     );

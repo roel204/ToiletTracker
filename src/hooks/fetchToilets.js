@@ -33,11 +33,16 @@ const fetchToilets = async (lat, lng) => {
         const response = await fetch(url, options);
         const fetchedToilets = await response.json();
 
+        // Filter the fetched toilets to ensure they have the expected structure
+        const validToilets = fetchedToilets.filter(toilet => toilet.id && toilet.name && toilet.latitude && toilet.longitude);
+
         // Add the fetched toilets to the array
-        toilets = toilets.concat(fetchedToilets);
+        toilets = toilets.concat(validToilets);
     } catch (error) {
-        console.error(error);
+        console.error("Failed to fetch toilets:", error);
     }
+
+    console.log(toilets);
 
     return toilets;
 };
