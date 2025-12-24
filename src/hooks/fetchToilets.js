@@ -1,6 +1,6 @@
 // Fetch toilets from the API
 const fetchToilets = async (lat, lng) => {
-    const url = `https://public-bathrooms.p.rapidapi.com/location?lat=${lat}&lng=${lng}`;
+    const url = `https://public-bathrooms.p.rapidapi.com/api/getByCords?lat=${lat}&lng=${lng}&radius=10`;
     const options = {
         method: 'GET',
         headers: {
@@ -12,22 +12,20 @@ const fetchToilets = async (lat, lng) => {
     let toilets = [];
 
     // Extra toilet for testing
-    const extraToilet = {
-        id: 6942069,
-        name: "Test Toilet",
-        street: "Test Street 123",
-        city: "Vlaardingen",
-        latitude: 51.909845,
-        longitude: 4.346065,
-        accessible: true,
-        unisex: false,
-        directions: "Located near the test building.",
-        comment: "This is a test toilet for development purposes.",
-        distance: 0.1,
-    };
-
-    // Add test toilet to the array
-    toilets.push(extraToilet);
+    // const extraToilet = {
+    //     id: 6942069,
+    //     name: "Test Toilet",
+    //     street: "Test Street 123",
+    //     city: "Vlaardingen",
+    //     latitude: 51.909845,
+    //     longitude: 4.346065,
+    //     accessible: true,
+    //     unisex: false,
+    //     directions: "Located near the test building.",
+    //     comment: "This is a test toilet for development purposes.",
+    //     distance: 0.1,
+    // };
+    // toilets.push(extraToilet);
 
     try {
         const response = await fetch(url, options);
